@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Greenly</title>
+    <title>Sign Up - Greenly</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../css/components.css">
     <style>
         body {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -27,7 +27,7 @@
             background: white;
             border-radius: 24px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 450px;
+            max-width: 480px;
             width: 100%;
             padding: 50px 40px;
         }
@@ -38,7 +38,7 @@
         }
 
         .auth-logo {
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin-bottom: 15px;
         }
 
@@ -81,6 +81,16 @@
             box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
         }
 
+        .form-select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 16px;
+            background: white;
+            cursor: pointer;
+        }
+
         .submit-btn {
             width: 100%;
             padding: 16px;
@@ -116,30 +126,6 @@
         .auth-link:hover {
             text-decoration: underline;
         }
-
-        .divider {
-            text-align: center;
-            margin: 25px 0;
-            position: relative;
-        }
-
-        .divider::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            width: 100%;
-            height: 1px;
-            background: var(--border-color);
-        }
-
-        .divider span {
-            background: white;
-            padding: 0 15px;
-            position: relative;
-            color: var(--text-medium);
-            font-size: 14px;
-        }
     </style>
 </head>
 
@@ -147,40 +133,53 @@
     <div class="auth-container">
         <div class="auth-header">
             <div class="auth-logo">🌿</div>
-            <h1 class="auth-title">Welcome Back</h1>
-            <p class="auth-subtitle">Sign in to continue shopping fresh!</p>
+            <h1 class="auth-title">Join Greenly</h1>
+            <p class="auth-subtitle">Create your account and start shopping fresh!</p>
         </div>
 
-        <form id="loginForm">
+        <form id="signupForm">
             <div class="form-group">
-                <label class="form-label">Email or Phone</label>
-                <input type="text" class="form-input" id="username" placeholder="Enter your email or phone" required>
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-input" id="fullName" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-input" id="email" placeholder="you@example.com" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-input" id="phone" placeholder="+91 98765 43210" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">I want to</label>
+                <select class="form-select" id="role" required>
+                    <option value="customer">Shop for fresh produce</option>
+                    <option value="vendor">Sell as a vendor</option>
+                    <option value="collector">Collect scrap materials</option>
+                </select>
             </div>
 
             <div class="form-group">
                 <label class="form-label">Password</label>
-                <input type="password" class="form-input" id="password" placeholder="Enter your password" required>
+                <input type="password" class="form-input" id="password" placeholder="Create a strong password" required>
             </div>
 
-            <button type="submit" class="submit-btn">Sign In</button>
+            <div class="form-group">
+                <label class="form-label">Confirm Password</label>
+                <input type="password" class="form-input" id="confirmPassword" placeholder="Re-enter your password"
+                    required>
+            </div>
+
+            <button type="submit" class="submit-btn">Create Account</button>
         </form>
 
-        <div class="divider">
-            <span>OR</span>
-        </div>
-
-        <a href="http://localhost:8000/admin/" target="_blank" class="btn btn-outline btn-block"
-            style="text-align: center; display: block; padding: 14px;">
-            🔐 Admin Panel
-        </a>
-
         <div class="auth-footer">
-            <p style="color: var(--text-medium); margin-bottom: 10px;">
-                Don't have an account?
-                <a href="signup.html" class="auth-link">Sign up</a>
-            </p>
             <p style="color: var(--text-medium);">
-                <a href="../index.html" class="auth-link">← Back to Home</a>
+                Already have an account?
+                <a href="login.html" class="auth-link">Sign in</a>
             </p>
         </div>
     </div>
@@ -188,17 +187,32 @@
     <script src="../js/config.js"></script>
     <script src="../js/utils.js"></script>
     <script>
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                showToast('Passwords do not match!', 'error');
+                return;
+            }
+
             const formData = {
-                username: document.getElementById('username').value,
-                password: document.getElementById('password').value
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                role: document.getElementById('role').value,
+                password: password
             };
 
             // TODO: Connect to backend API
-            console.log('Login data:', formData);
-            showToast('Login functionality will be connected to backend API soon!', 'info');
+            console.log('Signup data:', formData);
+            showToast('Account created successfully! Redirecting to login...', 'success');
+
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
         });
     </script>
 </body>
