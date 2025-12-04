@@ -240,9 +240,29 @@
 
     <script src="../js/config.js"></script>
     <script src="../js/utils.js"></script>
-    <script src="../js/cart.js"></script>
-    <script src="../js/location.js"></script>
     <script>
+        // Simple cart functions that work with any data structure
+        function getCart() {
+            const cartStr = localStorage.getItem('cart');
+            if (!cartStr) return [];
+            try {
+                return JSON.parse(cartStr);
+            } catch (e) {
+                console.error('Error parsing cart:', e);
+                return [];
+            }
+        }
+
+        function updateCartCount() {
+            const cart = getCart();
+            const count = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+            const badges = document.querySelectorAll('.cart-count');
+            badges.forEach(badge => {
+                badge.textContent = count;
+                badge.style.display = count > 0 ? 'inline-flex' : 'none';
+            });
+        }
+
         let deliveryDistance = 0;
         let deliveryCharge = 0;
         const DELIVERY_RATE = 10; // ₹10 per km
@@ -251,6 +271,8 @@
         function renderCart() {
             const cart = getCart();
             const container = document.getElementById('cartContainer');
+
+            console.log('Cart data:', cart); // Debug log
 
             if (cart.length === 0) {
                 container.innerHTML = `
@@ -264,7 +286,7 @@
                 return;
             }
 
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const subtotal = cart.reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 1)), 0);
 
             container.innerHTML = `
         <div class="cart-container">
@@ -272,20 +294,20 @@
             <h2 style="margin-bottom: 25px;">Cart Items (${cart.length})</h2>
             ${cart.map((item, index) => `
               <div class="cart-item">
-                <img src="${item.image || 'https://via.placeholder.com/100'}" alt="${item.name}" class="item-image" onerror="this.src='https://via.placeholder.com/100?text=${item.name}'">
+                <img src="${item.image || 'https://via.placeholder.com/100'}" alt="${item.name || 'Product'}" class="item-image" onerror="this.src='https://via.placeholder.com/100?text=${encodeURIComponent(item.name || 'Product')}'">
                 <div class="item-details">
-                  <h3>${item.name}</h3>
-                  <div class="item-vendor">📍 ${item.vendor || 'Local Vendor'}</div>
-                  <div class="item-price">₹${item.price}/${item.unit || 'unit'}</div>
+                  <h3>${item.name || 'Product'}</h3>
+                  <div class="item-vendor">📍 ${item.vendor || item.vendorName || 'Local Vendor'}</div>
+                  <div class="item-price">₹${item.price || 0}/${item.unit || 'unit'}</div>
                   <div class="quantity-controls">
                     <button class="qty-btn" onclick="updateQuantity(${index}, -1)">-</button>
-                    <span style="font-weight: 600; min-width: 30px; text-align: center;">${item.quantity}</span>
+                    <span style="font-weight: 600; min-width: 30px; text-align: center;">${item.quantity || 1}</span>
                     <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
                   </div>
                 </div>
                 <div class="item-actions">
                   <button class="remove-btn" onclick="removeItem(${index})">🗑️ Remove</button>
-                  <div style="font-size: 18px; font-weight: 700;">₹${(item.price * item.quantity).toFixed(2)}</div>
+                  <div style="font-size: 18px; font-weight: 700;">₹${((item.price || 0) * (item.quantity || 1)).toFixed(2)}</div>
                 </div>
               </div>
             `).join('')}
@@ -336,7 +358,7 @@
 
         function updateQuantity(index, change) {
             const cart = getCart();
-            cart[index].quantity += change;
+            cart[index].quantity = (cart[index].quantity || 1) + change;
 
             if (cart[index].quantity <= 0) {
                 cart.splice(index, 1);
@@ -345,37 +367,32 @@
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCartCount();
             renderCart();
-            showToast(change > 0 ? 'Quantity increased' : 'Quantity decreased', 'success');
         }
 
         function removeItem(index) {
             const cart = getCart();
-            const item = cart[index];
             cart.splice(index, 1);
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCartCount();
             renderCart();
-            showToast(`${item.name} removed from cart`, 'success');
         }
 
-        async function calculateDistance() {
+        function calculateDistance() {
             const address = document.getElementById('address').value;
             if (!address.trim()) {
-                showToast('Please enter delivery address', 'error');
+                alert('Please enter delivery address');
                 return;
             }
 
             const distanceInfo = document.getElementById('distanceInfo');
             distanceInfo.innerHTML = '<p style="text-align: center; padding: 10px;">📍 Calculating distance...</p>';
 
-            // Simulate distance calculation (in real app, use Google Maps API)
             setTimeout(() => {
-                // Random distance between 0.5 and 3 km for demo
                 deliveryDistance = (Math.random() * 2.5 + 0.5).toFixed(1);
                 deliveryCharge = Math.ceil(deliveryDistance * DELIVERY_RATE);
 
                 const cart = getCart();
-                const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const subtotal = cart.reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 1)), 0);
                 const total = subtotal + deliveryCharge;
 
                 document.getElementById('deliveryChargeDisplay').textContent = `₹${deliveryCharge.toFixed(2)}`;
@@ -394,8 +411,7 @@
                     distanceInfo.innerHTML = `
             <div class="distance-info distance-error">
               ❌ Distance: ${deliveryDistance} km<br>
-              Sorry, delivery is only available within ${MAX_DISTANCE} km radius.<br>
-              Please choose a closer address or pick up from vendor.
+              Sorry, delivery is only available within ${MAX_DISTANCE} km radius.
             </div>
           `;
                     document.getElementById('checkoutBtn').disabled = true;
@@ -405,42 +421,19 @@
 
         function proceedToCheckout() {
             const address = document.getElementById('address').value;
-            const landmark = document.getElementById('landmark').value;
-
-            if (!address.trim()) {
-                showToast('Please enter delivery address', 'error');
-                return;
-            }
-
-            if (deliveryDistance === 0) {
-                showToast('Please calculate delivery charge first', 'error');
+            if (!address.trim() || deliveryDistance === 0) {
+                alert('Please enter address and calculate delivery charge');
                 return;
             }
 
             const cart = getCart();
-            const orderData = {
-                items: cart,
-                deliveryAddress: address,
-                landmark: landmark,
-                distance: deliveryDistance,
-                deliveryCharge: deliveryCharge,
-                subtotal: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
-                total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) + deliveryCharge
-            };
+            const total = cart.reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 1)), 0) + deliveryCharge;
 
-            console.log('Order data:', orderData);
+            alert(`Order Confirmed!\\n\\nDelivery Address: ${address}\\nDistance: ${deliveryDistance} km\\nDelivery Charge: ₹${deliveryCharge}\\nTotal: ₹${total.toFixed(2)}\\n\\nYour order will be delivered in 20-30 minutes!`);
 
-            showToast('Order placed successfully! 🎉', 'success');
-
-            // Clear cart
             localStorage.setItem('cart', JSON.stringify([]));
             updateCartCount();
-
-            // Redirect to success page after 2 seconds
-            setTimeout(() => {
-                alert(`Order Confirmed!\\n\\nDelivery Address: ${address}\\nDistance: ${deliveryDistance} km\\nDelivery Charge: ₹${deliveryCharge}\\nTotal: ₹${orderData.total}\\n\\nYour order will be delivered in 20-30 minutes!`);
-                window.location.href = '../index.html';
-            }, 2000);
+            window.location.href = '../index.html';
         }
 
         // Initialize
