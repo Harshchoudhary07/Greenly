@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Greenly - Connect with local vendors for fresh fruits, vegetables, and eco-friendly services">
+  <title>Greenly - Fresh from Your Neighborhood</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/home.css">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <span>🌿</span>
+        <span>Greenly</span>
+      </a>
+
+      <div class="navbar-toggle" id="navbarToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <ul class="navbar-menu" id="navbarMenu">
+        <li><a href="index.html" class="navbar-link active">Home</a></li>
+        <li><a href="pages/products.html" class="navbar-link">Products</a></li>
+        <li><a href="pages/static/about.html" class="navbar-link">About</a></li>
+        <li><a href="pages/cart.html" class="navbar-link">Cart <span class="cart-count" id="cartCount">0</span></a></li>
+        <li><a href="pages/login.html" class="btn btn-primary btn-sm">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">
+            Fresh Produce from Your
+            <span class="text-primary">Local Vendors</span>
+          </h1>
+          <p class="hero-description">
+            Support your neighborhood vendors and get the freshest fruits & vegetables
+            delivered right to your doorstep. No cold storage, just pure freshness! 🌱
+          </p>
+
+          <div class="hero-features">
+            <div class="hero-feature">
+              <span class="hero-feature-icon">🚫</span>
+              <span>No Cold Storage</span>
+            </div>
+            <div class="hero-feature">
+              <span class="hero-feature-icon">🌿</span>
+              <span>100% Fresh</span>
+            </div>
+            <div class="hero-feature">
+              <span class="hero-feature-icon">💚</span>
+              <span>Support Local</span>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary btn-lg" id="findVendorsBtn">
+              📍 Find Vendors Near Me
+            </button>
+            <a href="pages/products.html" class="btn btn-outline btn-lg">
+              Browse Products
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <span class="hero-stat-number">500+</span>
+              <span class="hero-stat-label">Local Vendors</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-number">10K+</span>
+              <span class="hero-stat-label">Happy Customers</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-number">50+</span>
+              <span class="hero-stat-label">Neighborhoods</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-image">
+          <div class="hero-image-wrapper">
+            <img src="assets/images/hero-vegetables.png" alt="Fresh vegetables" id="heroImage">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories-section">
+    <div class="container">
+      <h2 class="section-title text-center">Shop by Category</h2>
+      <p class="section-subtitle text-center">Fresh produce from local vendors</p>
+
+      <div class="categories-grid">
+        <a href="pages/products.html?category=fruit" class="category-card">
+          <div class="category-icon">🍎</div>
+          <h3 class="category-name">Fruits</h3>
+          <p class="category-description">Fresh seasonal fruits</p>
+        </a>
+
+        <a href="pages/products.html?category=vegetable" class="category-card">
+          <div class="category-icon">🥕</div>
+          <h3 class="category-name">Vegetables</h3>
+          <p class="category-description">Farm-fresh veggies</p>
+        </a>
+
+        <a href="pages/products.html?category=leafy" class="category-card">
+          <div class="category-icon">🥬</div>
+          <h3 class="category-name">Leafy Greens</h3>
+          <p class="category-description">Nutritious greens</p>
+        </a>
+
+        <a href="pages/products.html?category=herbs" class="category-card">
+          <div class="category-icon">🌿</div>
+          <h3 class="category-name">Herbs</h3>
+          <p class="category-description">Aromatic herbs</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works">
+    <div class="container">
+      <h2 class="section-title text-center">How Greenly Works</h2>
+      <p class="section-subtitle text-center">Simple steps to fresh produce</p>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Find Vendors</h3>
+          <p class="step-description">
+            Allow location access to discover vendors near you selling fresh produce
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Browse & Order</h3>
+          <p class="step-description">
+            Browse products, check freshness tags, and add items to your cart
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Get Delivered</h3>
+          <p class="step-description">
+            Vendor confirms your order and delivers fresh produce to your doorstep
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3 class="step-title">Support Local</h3>
+          <p class="step-description">
+            Your purchase directly supports local vendors and their families
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vendor CTA -->
+  <section class="vendor-cta">
+    <div class="container">
+      <div class="vendor-cta-content">
+        <div class="vendor-cta-text">
+          <h2 class="vendor-cta-title">Are You a Vendor?</h2>
+          <p class="vendor-cta-description">
+            Join Greenly and reach thousands of customers in your neighborhood.
+            Get your own digital storefront and grow your business!
+          </p>
+          <ul class="vendor-cta-benefits">
+            <li>✅ Free registration</li>
+            <li>✅ Easy-to-use dashboard</li>
+            <li>✅ Reach more customers</li>
+            <li>✅ Manage orders digitally</li>
+          </ul>
+          <a href="pages/vendor/register.html" class="btn btn-secondary btn-lg">
+            Register as Vendor
+          </a>
+        </div>
+        <div class="vendor-cta-image">
+          <div class="vendor-cta-icon">🛒</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scrap Collector CTA -->
+  <section class="collector-cta">
+    <div class="container">
+      <div class="collector-cta-content">
+        <div class="collector-cta-image">
+          <div class="collector-cta-icon">♻️</div>
+        </div>
+        <div class="collector-cta-text">
+          <h2 class="collector-cta-title">Scrap Collectors</h2>
+          <p class="collector-cta-description">
+            Connect with customers who want to sell scrap materials.
+            Get pickup requests directly from your service area!
+          </p>
+          <a href="pages/collector/register.html" class="btn btn-primary btn-lg">
+            Register as Collector
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3 class="footer-title">
+            <span>🌿</span> Greenly
+          </h3>
+          <p class="footer-description">
+            Empowering local vendors and bringing fresh produce to your neighborhood.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="pages/static/about.html">About Us</a></li>
+            <li><a href="pages/static/faq.html">FAQ</a></li>
+            <li><a href="pages/products.html">Products</a></li>
+            <li><a href="pages/vendor/register.html">Become a Vendor</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Legal</h4>
+          <ul class="footer-links">
+            <li><a href="pages/static/terms.html">Terms of Service</a></li>
+            <li><a href="pages/static/privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4 class="footer-heading">Contact</h4>
+          <ul class="footer-links">
+            <li>📧 support@greenly.com</li>
+            <li>📱 +91 98765 43210</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Greenly. All rights reserved. Made with 💚 for local communities.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/location.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    // Mobile menu toggle
+    const navbarToggle = document.getElementById('navbarToggle');
+    const navbarMenu = document.getElementById('navbarMenu');
+
+    navbarToggle.addEventListener('click', () => {
+      navbarMenu.classList.toggle('active');
+    });
+
+    // Find vendors button
+    const findVendorsBtn = document.getElementById('findVendorsBtn');
+    findVendorsBtn.addEventListener('click', async () => {
+      try {
+        const location = await getLocation();
+        if (location) {
+          window.location.href = `pages/products.html?lat=${location.lat}&lng=${location.lng}`;
+        }
+      } catch (error) {
+        alert('Please enable location access to find vendors near you');
+      }
+    });
+
+    // Update cart count
+    function updateCartCount() {
+      const cart = getCart();
+      const count = cart.reduce((total, item) => total + item.quantity, 0);
+      document.getElementById('cartCount').textContent = count;
+    }
+
+    // Initialize
+    updateCartCount();
+  </script>
+</body>
+
+</html>
