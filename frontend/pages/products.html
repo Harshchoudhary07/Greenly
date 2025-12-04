@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Products - Greenly</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="../css/variables.css">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/components.css">
@@ -16,16 +17,19 @@
       padding: 20px;
       border-radius: 12px;
       margin-bottom: 30px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
+
     .filter-group {
       margin-bottom: 15px;
     }
+
     .filter-buttons {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
     }
+
     .filter-btn {
       padding: 8px 16px;
       border: 2px solid var(--border-color);
@@ -35,15 +39,18 @@
       transition: all 0.3s;
       font-size: 14px;
     }
+
     .filter-btn:hover {
       border-color: var(--primary);
       color: var(--primary);
     }
+
     .filter-btn.active {
       background: var(--primary);
       color: white;
       border-color: var(--primary);
     }
+
     .search-box {
       width: 100%;
       padding: 12px 20px;
@@ -51,68 +58,81 @@
       border-radius: 25px;
       font-size: 16px;
     }
+
     .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 24px;
     }
+
     .product-card {
       background: white;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s, box-shadow 0.3s;
     }
+
     .product-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     }
+
     .product-image {
       width: 100%;
       height: 200px;
       object-fit: cover;
       background: var(--bg-light);
     }
+
     .product-info {
       padding: 20px;
     }
+
     .product-vendor {
       font-size: 12px;
       color: var(--text-medium);
       margin-bottom: 8px;
     }
+
     .product-name {
       font-size: 18px;
       font-weight: 600;
       margin-bottom: 8px;
       color: var(--text-dark);
     }
+
     .product-price {
       font-size: 24px;
       font-weight: 700;
       color: var(--primary);
       margin-bottom: 12px;
     }
+
     .product-meta {
       display: flex;
       gap: 10px;
       margin-bottom: 15px;
       font-size: 13px;
     }
+
     .product-badge {
       padding: 4px 10px;
       border-radius: 12px;
       font-size: 12px;
       font-weight: 500;
     }
+
     .badge-fresh {
       background: #e8f5e9;
       color: #2e7d32;
     }
+
     .badge-stock {
       background: #fff3e0;
       color: #e65100;
     }
+
     .add-to-cart-btn {
       width: 100%;
       padding: 12px;
@@ -125,19 +145,23 @@
       cursor: pointer;
       transition: background 0.3s;
     }
+
     .add-to-cart-btn:hover {
       background: var(--primary-dark);
     }
+
     .add-to-cart-btn:disabled {
       background: var(--border-color);
       cursor: not-allowed;
     }
+
     .empty-state {
       text-align: center;
       padding: 60px 20px;
     }
   </style>
 </head>
+
 <body>
   <nav class="navbar">
     <div class="container navbar-container">
@@ -156,13 +180,13 @@
 
   <div class="container" style="padding: 40px 0;">
     <h1 style="margin-bottom: 30px;">🌿 Fresh Products</h1>
-    
+
     <!-- Filters -->
     <div class="filters-section">
       <div class="filter-group">
         <input type="text" class="search-box" id="searchInput" placeholder="🔍 Search products...">
       </div>
-      
+
       <div class="filter-group">
         <label style="font-weight: 600; margin-bottom: 10px; display: block;">Category:</label>
         <div class="filter-buttons" id="categoryFilters">
@@ -177,7 +201,7 @@
 
     <!-- Products Grid -->
     <div class="products-grid" id="productsGrid"></div>
-    
+
     <!-- Empty State -->
     <div class="empty-state" id="emptyState" style="display: none;">
       <div style="font-size: 4rem; margin-bottom: 20px;">🔍</div>
@@ -188,9 +212,25 @@
 
   <script src="../js/config.js"></script>
   <script src="../js/utils.js"></script>
-  <script src="../js/cart.js"></script>
   <script>
-    // Sample products data (will be replaced with API call)
+    // Simple cart functions
+    function getCart() {
+      const cart = localStorage.getItem('cart');
+      return cart ? JSON.parse(cart) : [];
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+    }
+
+    function updateCartCount() {
+      const cart = getCart();
+      const count = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+      document.getElementById('cartCount').textContent = count;
+    }
+
+    // Sample products data
     const sampleProducts = [
       {
         id: 1,
@@ -333,12 +373,12 @@
     function renderProducts() {
       const grid = document.getElementById('productsGrid');
       const emptyState = document.getElementById('emptyState');
-      
+
       // Filter products
       let filtered = sampleProducts.filter(product => {
         const matchesCategory = currentCategory === 'all' || product.category === currentCategory;
         const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                            product.vendor.toLowerCase().includes(searchTerm.toLowerCase());
+          product.vendor.toLowerCase().includes(searchTerm.toLowerCase());
         return matchesCategory && matchesSearch;
       });
 
@@ -353,7 +393,7 @@
 
       grid.innerHTML = filtered.map(product => `
         <div class="product-card">
-          <img src="${product.image}" alt="${product.name}" class="product-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22400%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2224%22 fill=%22%23999%22%3E${product.name}%3C/text%3E%3C/svg%3E'">
+          <img src="${product.image}" alt="${product.name}" class="product-image">
           <div class="product-info">
             <div class="product-vendor">📍 ${product.vendor}</div>
             <h3 class="product-name">${product.name}</h3>
@@ -375,18 +415,31 @@
       const product = sampleProducts.find(p => p.id === productId);
       if (!product) return;
 
-      addToCart({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        unit: product.unit,
-        vendor: product.vendor,
-        image: product.image,
-        quantity: 1
-      });
+      const cart = getCart();
+      const existingIndex = cart.findIndex(item => item.id === productId);
 
-      showToast(`${product.name} added to cart!`, 'success');
-      updateCartCount();
+      if (existingIndex > -1) {
+        cart[existingIndex].quantity += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          unit: product.unit,
+          vendor: product.vendor,
+          image: product.image,
+          quantity: 1
+        });
+      }
+
+      saveCart(cart);
+
+      // Show toast notification
+      const toast = document.createElement('div');
+      toast.textContent = `✅ ${product.name} added to cart!`;
+      toast.style.cssText = 'position:fixed;top:20px;right:20px;background:#4CAF50;color:white;padding:15px 25px;border-radius:8px;z-index:9999;animation:slideIn 0.3s;';
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2000);
     }
 
     // Category filter
@@ -423,4 +476,5 @@
     }
   </script>
 </body>
+
 </html>
