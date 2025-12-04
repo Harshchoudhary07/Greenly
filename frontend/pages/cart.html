@@ -5,9 +5,214 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart - Greenly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/components.css">
+    <style>
+        .cart-container {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+            padding: 40px 0;
+        }
+
+        @media (max-width: 968px) {
+            .cart-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cart-items {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 100px 1fr auto;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 12px;
+            background: var(--bg-light);
+        }
+
+        .item-details h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .item-vendor {
+            color: var(--text-medium);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .item-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .qty-btn {
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--primary);
+            background: white;
+            color: var(--primary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .qty-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .item-actions {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .remove-btn {
+            color: #f44336;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 8px;
+        }
+
+        .checkout-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .summary-row.total {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            padding-top: 15px;
+            border-top: 2px solid var(--border-color);
+            margin-top: 15px;
+        }
+
+        .delivery-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: var(--bg-light);
+            border-radius: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .distance-info {
+            background: #e8f5e9;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .distance-warning {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .distance-error {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+        }
+
+        .checkout-btn:disabled {
+            background: var(--border-color);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -20,26 +225,227 @@
             <ul class="navbar-menu">
                 <li><a href="../index.html" class="navbar-link">Home</a></li>
                 <li><a href="products.html" class="navbar-link">Products</a></li>
-                <li><a href="cart.html" class="navbar-link active">Cart</a></li>
+                <li><a href="cart.html" class="navbar-link active">Cart <span class="cart-count"
+                            id="cartCount">0</span></a></li>
                 <li><a href="http://localhost:8000/admin/" class="btn btn-primary btn-sm" target="_blank">Admin</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="container" style="padding: 40px 0;">
-        <h1 style="margin-bottom: 40px;">🛒 Shopping Cart</h1>
+    <div class="container">
+        <h1 style="margin: 40px 0 30px;">🛒 Shopping Cart</h1>
 
-        <div id="cartItems"></div>
-        <div id="cartSummary" style="margin-top: 40px;"></div>
+        <div id="cartContainer"></div>
     </div>
 
     <script src="../js/config.js"></script>
     <script src="../js/utils.js"></script>
     <script src="../js/cart.js"></script>
+    <script src="../js/location.js"></script>
     <script>
+        let deliveryDistance = 0;
+        let deliveryCharge = 0;
+        const DELIVERY_RATE = 10; // ₹10 per km
+        const MAX_DISTANCE = 2; // 2 km max
+
+        function renderCart() {
+            const cart = getCart();
+            const container = document.getElementById('cartContainer');
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+          <div class="empty-cart">
+            <div style="font-size: 5rem; margin-bottom: 20px;">🛒</div>
+            <h2>Your cart is empty</h2>
+            <p style="color: var(--text-medium); margin: 20px 0;">Add some fresh products to get started!</p>
+            <a href="products.html" class="btn btn-primary btn-lg">Browse Products</a>
+          </div>
+        `;
+                return;
+            }
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            container.innerHTML = `
+        <div class="cart-container">
+          <div class="cart-items">
+            <h2 style="margin-bottom: 25px;">Cart Items (${cart.length})</h2>
+            ${cart.map((item, index) => `
+              <div class="cart-item">
+                <img src="${item.image || 'https://via.placeholder.com/100'}" alt="${item.name}" class="item-image" onerror="this.src='https://via.placeholder.com/100?text=${item.name}'">
+                <div class="item-details">
+                  <h3>${item.name}</h3>
+                  <div class="item-vendor">📍 ${item.vendor || 'Local Vendor'}</div>
+                  <div class="item-price">₹${item.price}/${item.unit || 'unit'}</div>
+                  <div class="quantity-controls">
+                    <button class="qty-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                    <span style="font-weight: 600; min-width: 30px; text-align: center;">${item.quantity}</span>
+                    <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                  </div>
+                </div>
+                <div class="item-actions">
+                  <button class="remove-btn" onclick="removeItem(${index})">🗑️ Remove</button>
+                  <div style="font-size: 18px; font-weight: 700;">₹${(item.price * item.quantity).toFixed(2)}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="checkout-card">
+            <h2 style="margin-bottom: 20px;">Order Summary</h2>
+            
+            <div class="delivery-section">
+              <h3 style="margin-bottom: 15px; font-size: 16px;">📍 Delivery Address</h3>
+              <div class="form-group">
+                <label class="form-label">Street Address</label>
+                <input type="text" class="form-input" id="address" placeholder="Enter your delivery address" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Landmark (Optional)</label>
+                <input type="text" class="form-input" id="landmark" placeholder="Near...">
+              </div>
+              <button class="btn btn-outline btn-block" onclick="calculateDistance()" style="width: 100%;">
+                📍 Calculate Delivery Charge
+              </button>
+              <div id="distanceInfo"></div>
+            </div>
+
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span>₹${subtotal.toFixed(2)}</span>
+            </div>
+            <div class="summary-row">
+              <span>Delivery Charge</span>
+              <span id="deliveryChargeDisplay">₹0.00</span>
+            </div>
+            <div class="summary-row total">
+              <span>Total</span>
+              <span id="totalDisplay">₹${subtotal.toFixed(2)}</span>
+            </div>
+
+            <button class="checkout-btn" id="checkoutBtn" onclick="proceedToCheckout()" disabled>
+              Proceed to Checkout
+            </button>
+            <p style="text-align: center; margin-top: 15px; font-size: 13px; color: var(--text-medium);">
+              💚 Supporting local vendors
+            </p>
+          </div>
+        </div>
+      `;
+        }
+
+        function updateQuantity(index, change) {
+            const cart = getCart();
+            cart[index].quantity += change;
+
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+            showToast(change > 0 ? 'Quantity increased' : 'Quantity decreased', 'success');
+        }
+
+        function removeItem(index) {
+            const cart = getCart();
+            const item = cart[index];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+            showToast(`${item.name} removed from cart`, 'success');
+        }
+
+        async function calculateDistance() {
+            const address = document.getElementById('address').value;
+            if (!address.trim()) {
+                showToast('Please enter delivery address', 'error');
+                return;
+            }
+
+            const distanceInfo = document.getElementById('distanceInfo');
+            distanceInfo.innerHTML = '<p style="text-align: center; padding: 10px;">📍 Calculating distance...</p>';
+
+            // Simulate distance calculation (in real app, use Google Maps API)
+            setTimeout(() => {
+                // Random distance between 0.5 and 3 km for demo
+                deliveryDistance = (Math.random() * 2.5 + 0.5).toFixed(1);
+                deliveryCharge = Math.ceil(deliveryDistance * DELIVERY_RATE);
+
+                const cart = getCart();
+                const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const total = subtotal + deliveryCharge;
+
+                document.getElementById('deliveryChargeDisplay').textContent = `₹${deliveryCharge.toFixed(2)}`;
+                document.getElementById('totalDisplay').textContent = `₹${total.toFixed(2)}`;
+
+                if (deliveryDistance <= MAX_DISTANCE) {
+                    distanceInfo.innerHTML = `
+            <div class="distance-info">
+              ✅ Distance: ${deliveryDistance} km<br>
+              💰 Delivery charge: ₹${deliveryCharge} (₹${DELIVERY_RATE}/km)<br>
+              🚚 Estimated delivery: 20-30 mins
+            </div>
+          `;
+                    document.getElementById('checkoutBtn').disabled = false;
+                } else {
+                    distanceInfo.innerHTML = `
+            <div class="distance-info distance-error">
+              ❌ Distance: ${deliveryDistance} km<br>
+              Sorry, delivery is only available within ${MAX_DISTANCE} km radius.<br>
+              Please choose a closer address or pick up from vendor.
+            </div>
+          `;
+                    document.getElementById('checkoutBtn').disabled = true;
+                }
+            }, 1000);
+        }
+
+        function proceedToCheckout() {
+            const address = document.getElementById('address').value;
+            const landmark = document.getElementById('landmark').value;
+
+            if (!address.trim()) {
+                showToast('Please enter delivery address', 'error');
+                return;
+            }
+
+            if (deliveryDistance === 0) {
+                showToast('Please calculate delivery charge first', 'error');
+                return;
+            }
+
+            const cart = getCart();
+            const orderData = {
+                items: cart,
+                deliveryAddress: address,
+                landmark: landmark,
+                distance: deliveryDistance,
+                deliveryCharge: deliveryCharge,
+                subtotal: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) + deliveryCharge
+            };
+
+            console.log('Order data:', orderData);
+
+            showToast('Order placed successfully! 🎉', 'success');
+
+            // Clear cart
+            localStorage.setItem('cart', JSON.stringify([]));
+            updateCartCount();
+
+            // Redirect to success page after 2 seconds
+            setTimeout(() => {
+                alert(`Order Confirmed!\\n\\nDelivery Address: ${address}\\nDistance: ${deliveryDistance} km\\nDelivery Charge: ₹${deliveryCharge}\\nTotal: ₹${orderData.total}\\n\\nYour order will be delivered in 20-30 minutes!`);
+                window.location.href = '../index.html';
+            }, 2000);
+        }
+
+        // Initialize
         updateCartCount();
-        renderCartItems('cartItems');
-        renderCartSummary('cartSummary');
+        renderCart();
     </script>
 </body>
 
