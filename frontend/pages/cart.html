@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Greenly</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="../index.html" class="navbar-logo">
+                <span>🌿</span>
+                <span>Greenly</span>
+            </a>
+            <ul class="navbar-menu">
+                <li><a href="../index.html" class="navbar-link">Home</a></li>
+                <li><a href="products.html" class="navbar-link">Products</a></li>
+                <li><a href="cart.html" class="navbar-link active">Cart</a></li>
+                <li><a href="http://localhost:8000/admin/" class="btn btn-primary btn-sm" target="_blank">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" style="padding: 40px 0;">
+        <h1 style="margin-bottom: 40px;">🛒 Shopping Cart</h1>
+
+        <div id="cartItems"></div>
+        <div id="cartSummary" style="margin-top: 40px;"></div>
+    </div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/cart.js"></script>
+    <script>
+        updateCartCount();
+        renderCartItems('cartItems');
+        renderCartSummary('cartSummary');
+    </script>
+</body>
+
+</html>

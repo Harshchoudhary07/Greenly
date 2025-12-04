@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Greenly</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="../index.html" class="navbar-logo">
+                <span>🌿</span>
+                <span>Greenly</span>
+            </a>
+            <ul class="navbar-menu">
+                <li><a href="../index.html" class="navbar-link">Home</a></li>
+                <li><a href="products.html" class="navbar-link active">Products</a></li>
+                <li><a href="cart.html" class="navbar-link">Cart <span class="cart-count" id="cartCount">0</span></a>
+                </li>
+                <li><a href="http://localhost:8000/admin/" class="btn btn-primary btn-sm" target="_blank">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" style="padding: 40px 0;">
+        <h1 class="text-center" style="margin-bottom: 40px;">🌿 Fresh Products</h1>
+
+        <div class="text-center" style="padding: 60px 20px;">
+            <div style="font-size: 4rem; margin-bottom: 20px;">🛒</div>
+            <h2>Products Coming Soon!</h2>
+            <p style="color: var(--text-medium); margin: 20px 0;">
+                We're setting up our product catalog. Meanwhile, you can:
+            </p>
+            <div style="margin-top: 30px;">
+                <a href="http://localhost:8000/admin/" target="_blank" class="btn btn-primary btn-lg">
+                    Add Products via Admin Panel
+                </a>
+                <a href="../index.html" class="btn btn-outline btn-lg" style="margin-left: 10px;">
+                    Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/cart.js"></script>
+    <script>updateCartCount();</script>
+</body>
+
+</html>
