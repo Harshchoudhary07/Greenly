@@ -4,378 +4,117 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Products - Greenly</title>
+  <title>Fresh Products - Greenly</title>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="../css/variables.css">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/components.css">
-  <style>
-    .filters-section {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 30px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
-
-    .filter-group {
-      margin-bottom: 15px;
-    }
-
-    .filter-buttons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .filter-btn {
-      padding: 8px 16px;
-      border: 2px solid var(--border-color);
-      background: white;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-size: 14px;
-    }
-
-    .filter-btn:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-    }
-
-    .filter-btn.active {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-    }
-
-    .search-box {
-      width: 100%;
-      padding: 12px 20px;
-      border: 2px solid var(--border-color);
-      border-radius: 25px;
-      font-size: 16px;
-    }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
-    .product-card {
-      background: white;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    }
-
-    .product-image {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      background: var(--bg-light);
-    }
-
-    .product-info {
-      padding: 20px;
-    }
-
-    .product-vendor {
-      font-size: 12px;
-      color: var(--text-medium);
-      margin-bottom: 8px;
-    }
-
-    .product-name {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: var(--text-dark);
-    }
-
-    .product-price {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 12px;
-    }
-
-    .product-meta {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 15px;
-      font-size: 13px;
-    }
-
-    .product-badge {
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    .badge-fresh {
-      background: #e8f5e9;
-      color: #2e7d32;
-    }
-
-    .badge-stock {
-      background: #fff3e0;
-      color: #e65100;
-    }
-
-    .add-to-cart-btn {
-      width: 100%;
-      padding: 12px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .add-to-cart-btn:hover {
-      background: var(--primary-dark);
-    }
-
-    .add-to-cart-btn:disabled {
-      background: var(--border-color);
-      cursor: not-allowed;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 60px 20px;
-    }
-  </style>
+  <link rel="stylesheet" href="../css/freshmarket-theme.css">
 </head>
 
 <body>
-  <nav class="navbar">
+  <!-- Navigation -->
+  <nav class="navbar" style="background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
     <div class="container navbar-container">
-      <a href="../index.html" class="navbar-logo">
-        <span>🌿</span>
-        <span>Greenly</span>
+      <a href="../index.html" class="navbar-logo" style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 28px;">🌿</span>
+        <span style="font-weight: 700; font-size: 20px;">Greenly</span>
       </a>
-      <ul class="navbar-menu">
-        <li><a href="../index.html" class="navbar-link">Home</a></li>
-        <li><a href="products.html" class="navbar-link active">Products</a></li>
-        <li><a href="cart.html" class="navbar-link">Cart <span class="cart-count" id="cartCount">0</span></a></li>
-        <li><a href="http://localhost:8000/admin/" class="btn btn-primary btn-sm" target="_blank">Admin</a></li>
+      <ul class="navbar-menu" style="display: flex; align-items: center; gap: 32px; list-style: none;">
+        <li><a href="products.html?category=vegetable"
+            style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Vegetables</a></li>
+        <li><a href="products.html?category=fruit"
+            style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Fruits</a></li>
+        <li><a href="vendors.html" style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Vendors</a>
+        </li>
+        <li><a href="../index.html#scrap"
+            style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Scrap Services</a></li>
       </ul>
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <div style="display: flex; align-items: center; gap: 6px; color: var(--text-medium); font-size: 14px;">
+          <span>📍</span>
+          <span>Bengaluru</span>
+        </div>
+        <a href="cart.html" style="position: relative; text-decoration: none;">
+          <span style="font-size: 24px;">🛒</span>
+          <span class="cart-count" id="cartCount"
+            style="position: absolute; top: -8px; right: -8px; background: var(--primary); color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">0</span>
+        </a>
+        <a href="login.html" class="btn"
+          style="border: 2px solid var(--primary); color: var(--primary); background: white; padding: 8px 20px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+          👤 Login
+        </a>
+      </div>
     </div>
   </nav>
 
-  <div class="container" style="padding: 40px 0;">
-    <h1 style="margin-bottom: 30px;">🌿 Fresh Products</h1>
+  <!-- Page Header -->
+  <section style="background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 100%); padding: 60px 0;">
+    <div class="container">
+      <h1 style="font-size: 48px; margin-bottom: 16px;">🌿 Fresh Products</h1>
+      <p style="font-size: 18px; color: var(--text-medium);">Farm fresh produce directly from local vendors</p>
 
-    <!-- Filters -->
-    <div class="filters-section">
-      <div class="filter-group">
-        <input type="text" class="search-box" id="searchInput" placeholder="🔍 Search products...">
-      </div>
-
-      <div class="filter-group">
-        <label style="font-weight: 600; margin-bottom: 10px; display: block;">Category:</label>
-        <div class="filter-buttons" id="categoryFilters">
-          <button class="filter-btn active" data-category="all">All</button>
-          <button class="filter-btn" data-category="fruit">🍎 Fruits</button>
-          <button class="filter-btn" data-category="vegetable">🥕 Vegetables</button>
-          <button class="filter-btn" data-category="leafy">🥬 Leafy Greens</button>
-          <button class="filter-btn" data-category="herbs">🌿 Herbs</button>
+      <div style="margin-top: 32px; display: flex; gap: 16px; flex-wrap: wrap;">
+        <input type="text" id="searchInput" placeholder="🔍 Search products..."
+          style="flex: 1; min-width: 300px; padding: 14px 20px; border: 2px solid var(--border-color); border-radius: 12px; font-size: 15px;">
+        <div id="categoryFilters" style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="filter-btn active" data-category="all"
+            style="padding: 12px 20px; border: 2px solid var(--primary); background: var(--primary); color: white; border-radius: 12px; cursor: pointer; font-weight: 600;">All</button>
+          <button class="filter-btn" data-category="vegetable"
+            style="padding: 12px 20px; border: 2px solid var(--border-color); background: white; color: var(--text-dark); border-radius: 12px; cursor: pointer; font-weight: 600;">🥕
+            Vegetables</button>
+          <button class="filter-btn" data-category="fruit"
+            style="padding: 12px 20px; border: 2px solid var(--border-color); background: white; color: var(--text-dark); border-radius: 12px; cursor: pointer; font-weight: 600;">🍎
+            Fruits</button>
+          <button class="filter-btn" data-category="leafy"
+            style="padding: 12px 20px; border: 2px solid var(--border-color); background: white; color: var(--text-dark); border-radius: 12px; cursor: pointer; font-weight: 600;">🥬
+            Leafy</button>
+          <button class="filter-btn" data-category="herbs"
+            style="padding: 12px 20px; border: 2px solid var(--border-color); background: white; color: var(--text-dark); border-radius: 12px; cursor: pointer; font-weight: 600;">🌿
+            Herbs</button>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Products Grid -->
-    <div class="products-grid" id="productsGrid"></div>
-
-    <!-- Empty State -->
-    <div class="empty-state" id="emptyState" style="display: none;">
-      <div style="font-size: 4rem; margin-bottom: 20px;">🔍</div>
-      <h2>No products found</h2>
-      <p style="color: var(--text-medium);">Try adjusting your filters or search term</p>
+  <!-- Products Grid -->
+  <section class="section-new">
+    <div class="container">
+      <div id="productsGrid" class="grid-4"></div>
+      <div id="emptyState" style="display: none; text-align: center; padding: 60px 20px;">
+        <div style="font-size: 64px; margin-bottom: 20px;">🔍</div>
+        <h2>No products found</h2>
+        <p style="color: var(--text-medium);">Try adjusting your search or filters</p>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <script src="../js/config.js"></script>
-  <script src="../js/utils.js"></script>
   <script>
-    // Simple cart functions
-    function getCart() {
-      const cart = localStorage.getItem('cart');
-      return cart ? JSON.parse(cart) : [];
-    }
-
-    function saveCart(cart) {
-      localStorage.setItem('cart', JSON.stringify(cart));
-      updateCartCount();
-    }
-
-    function updateCartCount() {
-      const cart = getCart();
-      const count = cart.reduce((total, item) => total + (item.quantity || 1), 0);
-      document.getElementById('cartCount').textContent = count;
-    }
-
-    // Sample products data
-    const sampleProducts = [
-      {
-        id: 1,
-        name: "Fresh Tomatoes",
-        category: "vegetable",
-        price: 40,
-        unit: "kg",
-        stock: 50,
-        vendor: "Ramesh Vegetables",
-        freshness: "Picked Today",
-        image: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=400"
-      },
-      {
-        id: 2,
-        name: "Organic Apples",
-        category: "fruit",
-        price: 120,
-        unit: "kg",
-        stock: 30,
-        vendor: "Fresh Fruits Corner",
-        freshness: "Farm Fresh",
-        image: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400"
-      },
-      {
-        id: 3,
-        name: "Spinach",
-        category: "leafy",
-        price: 25,
-        unit: "bunch",
-        stock: 40,
-        vendor: "Green Leaves",
-        freshness: "Morning Harvest",
-        image: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=400"
-      },
-      {
-        id: 4,
-        name: "Fresh Coriander",
-        category: "herbs",
-        price: 15,
-        unit: "bunch",
-        stock: 25,
-        vendor: "Herb Garden",
-        freshness: "Just Picked",
-        image: "https://images.unsplash.com/photo-1592417817038-d13fd7342605?w=400"
-      },
-      {
-        id: 5,
-        name: "Bananas",
-        category: "fruit",
-        price: 50,
-        unit: "dozen",
-        stock: 60,
-        vendor: "Tropical Fruits",
-        freshness: "Ripe & Ready",
-        image: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400"
-      },
-      {
-        id: 6,
-        name: "Potatoes",
-        category: "vegetable",
-        price: 30,
-        unit: "kg",
-        stock: 100,
-        vendor: "Ramesh Vegetables",
-        freshness: "Farm Fresh",
-        image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400"
-      },
-      {
-        id: 7,
-        name: "Lettuce",
-        category: "leafy",
-        price: 35,
-        unit: "piece",
-        stock: 20,
-        vendor: "Green Leaves",
-        freshness: "Crisp & Fresh",
-        image: "https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=400"
-      },
-      {
-        id: 8,
-        name: "Mint Leaves",
-        category: "herbs",
-        price: 10,
-        unit: "bunch",
-        stock: 30,
-        vendor: "Herb Garden",
-        freshness: "Aromatic",
-        image: "https://images.unsplash.com/photo-1628556270448-4d4e4148e1b1?w=400"
-      },
-      {
-        id: 9,
-        name: "Mangoes",
-        category: "fruit",
-        price: 150,
-        unit: "kg",
-        stock: 40,
-        vendor: "Tropical Fruits",
-        freshness: "Sweet & Juicy",
-        image: "https://images.unsplash.com/photo-1553279768-865429fa0078?w=400"
-      },
-      {
-        id: 10,
-        name: "Carrots",
-        category: "vegetable",
-        price: 45,
-        unit: "kg",
-        stock: 55,
-        vendor: "Ramesh Vegetables",
-        freshness: "Crunchy Fresh",
-        image: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=400"
-      },
-      {
-        id: 11,
-        name: "Kale",
-        category: "leafy",
-        price: 40,
-        unit: "bunch",
-        stock: 15,
-        vendor: "Green Leaves",
-        freshness: "Nutrient Rich",
-        image: "https://images.unsplash.com/photo-1590777675897-ff3834c04e6f?w=400"
-      },
-      {
-        id: 12,
-        name: "Basil",
-        category: "herbs",
-        price: 20,
-        unit: "bunch",
-        stock: 22,
-        vendor: "Herb Garden",
-        freshness: "Fragrant",
-        image: "https://images.unsplash.com/photo-1618375569909-3c8616cf7733?w=400"
-      }
+    const products = [
+      { id: 1, name: "Fresh Tomatoes", category: "vegetable", price: 40, unit: "kg", vendor: "Ram's Vegetable Stall", distance: 0.8, rating: 4.8, status: "Picked Today", emoji: "🍅", bgColor: "var(--bg-light-pink)" },
+      { id: 2, name: "Organic Apples", category: "fruit", price: 120, unit: "kg", vendor: "Fresh Fruits Corner", distance: 1.2, rating: 4.9, status: "Farm Fresh", emoji: "🍎", bgColor: "var(--bg-light-pink)" },
+      { id: 3, name: "Spinach", category: "leafy", price: 25, unit: "bunch", vendor: "Green Leaves", distance: 0.9, rating: 4.7, status: "Morning Harvest", emoji: "🥬", bgColor: "var(--bg-light-green)" },
+      { id: 4, name: "Fresh Coriander", category: "herbs", price: 15, unit: "bunch", vendor: "Herb Garden", distance: 0.9, rating: 4.6, status: "Just Picked", emoji: "🌿", bgColor: "var(--bg-light-green)" },
+      { id: 5, name: "Bananas", category: "fruit", price: 50, unit: "dozen", vendor: "Tropical Fruits", distance: 1.8, rating: 4.7, status: "Ripe & Ready", emoji: "🍌", bgColor: "var(--bg-light-yellow)" },
+      { id: 6, name: "Potatoes", category: "vegetable", price: 30, unit: "kg", vendor: "Ram's Vegetable Stall", distance: 0.8, rating: 4.5, status: "Farm Fresh", emoji: "🥔", bgColor: "var(--bg-light-beige)" },
+      { id: 7, name: "Lettuce", category: "leafy", price: 35, unit: "piece", vendor: "Green Leaves", distance: 0.9, rating: 4.6, status: "Crisp & Fresh", emoji: "🥬", bgColor: "var(--bg-light-green)" },
+      { id: 8, name: "Mint Leaves", category: "herbs", price: 10, unit: "bunch", vendor: "Herb Garden", distance: 0.9, rating: 4.7, status: "Aromatic", emoji: "🌿", bgColor: "var(--bg-light-green)" },
+      { id: 9, name: "Mangoes", category: "fruit", price: 150, unit: "kg", vendor: "Tropical Fruits", distance: 1.8, rating: 4.8, status: "Sweet & Juicy", emoji: "🥭", bgColor: "var(--bg-light-orange)" },
+      { id: 10, name: "Carrots", category: "vegetable", price: 45, unit: "kg", vendor: "Ram's Vegetable Stall", distance: 0.8, rating: 4.6, status: "Crunchy Fresh", emoji: "🥕", bgColor: "var(--bg-light-orange)" },
+      { id: 11, name: "Kale", category: "leafy", price: 40, unit: "bunch", vendor: "Green Leaves", distance: 0.9, rating: 4.7, status: "Nutrient Rich", emoji: "🥬", bgColor: "var(--bg-light-green)" },
+      { id: 12, name: "Basil", category: "herbs", price: 20, unit: "bunch", vendor: "Herb Garden", distance: 0.9, rating: 4.8, status: "Fragrant", emoji: "🌿", bgColor: "var(--bg-light-green)" }
     ];
 
     let currentCategory = 'all';
     let searchTerm = '';
 
-    // Render products
     function renderProducts() {
       const grid = document.getElementById('productsGrid');
       const emptyState = document.getElementById('emptyState');
 
-      // Filter products
-      let filtered = sampleProducts.filter(product => {
+      let filtered = products.filter(product => {
         const matchesCategory = currentCategory === 'all' || product.category === currentCategory;
         const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
           product.vendor.toLowerCase().includes(searchTerm.toLowerCase());
@@ -392,27 +131,31 @@
       emptyState.style.display = 'none';
 
       grid.innerHTML = filtered.map(product => `
-        <div class="product-card">
-          <img src="${product.image}" alt="${product.name}" class="product-image">
-          <div class="product-info">
-            <div class="product-vendor">📍 ${product.vendor}</div>
-            <h3 class="product-name">${product.name}</h3>
-            <div class="product-price">₹${product.price}<span style="font-size: 14px; font-weight: 400; color: var(--text-medium);">/${product.unit}</span></div>
-            <div class="product-meta">
-              <span class="product-badge badge-fresh">✨ ${product.freshness}</span>
-              <span class="product-badge badge-stock">📦 ${product.stock} ${product.unit}</span>
-            </div>
-            <button class="add-to-cart-btn" onclick="addProductToCart(${product.id})" ${product.stock === 0 ? 'disabled' : ''}>
-              ${product.stock === 0 ? 'Out of Stock' : '🛒 Add to Cart'}
-            </button>
+        <div class="product-card-new" style="background: ${product.bgColor};">
+          <span class="status-badge open">${product.status}</span>
+          <div class="product-illustration">${product.emoji}</div>
+          <div class="product-vendor-info">
+            <span>📍 ${product.vendor}</span>
+            <span>${product.distance} km</span>
           </div>
+          <h3>${product.name}</h3>
+          <div class="product-card-footer">
+            <div class="product-price-new">
+              ₹${product.price}<span class="unit">/${product.unit}</span>
+            </div>
+            <div class="product-rating">
+              <span class="rating-star">⭐</span> ${product.rating}
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="addToCart(${product.id})" style="width: 100%; margin-top: 12px;">
+            🛒 Add to Cart
+          </button>
         </div>
       `).join('');
     }
 
-    // Add to cart
-    function addProductToCart(productId) {
-      const product = sampleProducts.find(p => p.id === productId);
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
       if (!product) return;
 
       const cart = getCart();
@@ -427,25 +170,49 @@
           price: product.price,
           unit: product.unit,
           vendor: product.vendor,
-          image: product.image,
+          image: product.emoji,
           quantity: 1
         });
       }
 
       saveCart(cart);
 
-      // Show toast notification
       const toast = document.createElement('div');
       toast.textContent = `✅ ${product.name} added to cart!`;
-      toast.style.cssText = 'position:fixed;top:20px;right:20px;background:#4CAF50;color:white;padding:15px 25px;border-radius:8px;z-index:9999;animation:slideIn 0.3s;';
+      toast.style.cssText = 'position:fixed;top:20px;right:20px;background:#00C853;color:white;padding:15px 25px;border-radius:12px;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,0.15);font-weight:600;';
       document.body.appendChild(toast);
       setTimeout(() => toast.remove(), 2000);
+    }
+
+    function getCart() {
+      const cart = localStorage.getItem('cart');
+      return cart ? JSON.parse(cart) : [];
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+    }
+
+    function updateCartCount() {
+      const cart = getCart();
+      const count = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+      document.getElementById('cartCount').textContent = count;
+      document.getElementById('cartCount').style.display = count > 0 ? 'flex' : 'none';
     }
 
     // Category filter
     document.getElementById('categoryFilters').addEventListener('click', (e) => {
       if (e.target.classList.contains('filter-btn')) {
-        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+          btn.style.background = 'white';
+          btn.style.color = 'var(--text-dark)';
+          btn.style.borderColor = 'var(--border-color)';
+          btn.classList.remove('active');
+        });
+        e.target.style.background = 'var(--primary)';
+        e.target.style.color = 'white';
+        e.target.style.borderColor = 'var(--primary)';
         e.target.classList.add('active');
         currentCategory = e.target.dataset.category;
         renderProducts();
@@ -458,22 +225,17 @@
       renderProducts();
     });
 
-    // Initialize
-    updateCartCount();
-    renderProducts();
-
-    // Check URL params for category
+    // Check URL params
     const urlParams = new URLSearchParams(window.location.search);
     const categoryParam = urlParams.get('category');
     if (categoryParam) {
       const btn = document.querySelector(`[data-category="${categoryParam}"]`);
-      if (btn) {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentCategory = categoryParam;
-        renderProducts();
-      }
+      if (btn) btn.click();
     }
+
+    // Initialize
+    updateCartCount();
+    renderProducts();
   </script>
 </body>
 

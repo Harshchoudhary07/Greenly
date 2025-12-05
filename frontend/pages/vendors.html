@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trusted Vendors - Greenly</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/freshmarket-theme.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" style="background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+        <div class="container navbar-container">
+            <a href="../index.html" class="navbar-logo" style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 28px;">🌿</span>
+                <span style="font-weight: 700; font-size: 20px;">Greenly</span>
+            </a>
+            <ul class="navbar-menu" style="display: flex; align-items: center; gap: 32px; list-style: none;">
+                <li><a href="products.html?category=vegetable"
+                        style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Vegetables</a></li>
+                <li><a href="products.html?category=fruit"
+                        style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Fruits</a></li>
+                <li><a href="vendors.html"
+                        style="text-decoration: none; color: var(--primary); font-weight: 600;">Vendors</a></li>
+                <li><a href="../index.html#scrap"
+                        style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Scrap Services</a>
+                </li>
+            </ul>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <div style="display: flex; align-items: center; gap: 6px; color: var(--text-medium); font-size: 14px;">
+                    <span>📍</span>
+                    <span>Bengaluru</span>
+                </div>
+                <a href="cart.html" style="position: relative; text-decoration: none;">
+                    <span style="font-size: 24px;">🛒</span>
+                    <span class="cart-count" id="cartCount"
+                        style="position: absolute; top: -8px; right: -8px; background: var(--primary); color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">0</span>
+                </a>
+                <a href="login.html" class="btn"
+                    style="border: 2px solid var(--primary); color: var(--primary); background: white; padding: 8px 20px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+                    👤 Login
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section style="background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 100%); padding: 60px 0;">
+        <div class="container">
+            <h1 style="font-size: 48px; margin-bottom: 16px;">Trusted Vendors</h1>
+            <p style="font-size: 18px; color: var(--text-medium);">Local sellers bringing freshness to your doorstep</p>
+
+            <div style="margin-top: 32px; display: flex; gap: 16px; flex-wrap: wrap;">
+                <input type="text" id="searchInput" placeholder="🔍 Search vendors..."
+                    style="flex: 1; min-width: 300px; padding: 14px 20px; border: 2px solid var(--border-color); border-radius: 12px; font-size: 15px;">
+                <select id="statusFilter"
+                    style="padding: 14px 20px; border: 2px solid var(--border-color); border-radius: 12px; font-size: 15px;">
+                    <option value="all">All Vendors</option>
+                    <option value="open">Open Now</option>
+                    <option value="closed">Closed</option>
+                </select>
+                <select id="sortBy"
+                    style="padding: 14px 20px; border: 2px solid var(--border-color); border-radius: 12px; font-size: 15px;">
+                    <option value="distance">Nearest First</option>
+                    <option value="rating">Highest Rated</option>
+                    <option value="name">Name (A-Z)</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vendors Grid -->
+    <section class="section-new">
+        <div class="container">
+            <div id="vendorsGrid" class="grid-3"></div>
+        </div>
+    </section>
+
+    <!-- Vendor CTA -->
+    <section class="section-new" style="background: var(--bg-light);">
+        <div class="container">
+            <div
+                style="background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 100%); border-radius: 24px; padding: 60px; text-align: center;">
+                <h2 style="font-size: 36px; margin-bottom: 16px;">Are you a local vendor?</h2>
+                <p
+                    style="font-size: 18px; color: var(--text-medium); margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Join our platform and reach thousands of customers in your neighborhood. Get a digital presence for
+                    your stall today!
+                </p>
+                <a href="vendor/register.html" class="btn btn-primary btn-lg" style="padding: 16px 32px;">
+                    Register as Vendor →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const vendors = [
+            {
+                id: 1,
+                name: "Ram's Vegetable Stall",
+                specialty: "Fresh Vegetables",
+                avatar: "👨‍🌾",
+                bgColor: "var(--bg-light-green)",
+                status: "open",
+                distance: 0.8,
+                products: ["🍅", "🥬", "🥕", "🥒"],
+                rating: 4.8,
+                reviews: 156,
+                badge: "Verified Seller",
+                badgeColor: "#E3F2FD",
+                badgeText: "#1976D2"
+            },
+            {
+                id: 2,
+                name: "Lakshmi's Fruit Corner",
+                specialty: "Seasonal Fruits",
+                avatar: "🍎",
+                bgColor: "var(--bg-light-pink)",
+                status: "open",
+                distance: 1.2,
+                products: ["🍎", "🍌", "🍊", "🍇"],
+                rating: 4.9,
+                reviews: 203,
+                badge: "Top Rated",
+                badgeColor: "#FFF3E0",
+                badgeText: "#F57C00"
+            },
+            {
+                id: 3,
+                name: "Green Earth Organics",
+                specialty: "Organic Produce",
+                avatar: "🌿",
+                bgColor: "var(--bg-light-yellow)",
+                status: "closed",
+                distance: 1.5,
+                products: ["🥒", "🥦", "🌽", "🍆"],
+                rating: 4.7,
+                reviews: 89,
+                badge: "Certified Organic",
+                badgeColor: "#E8F5E9",
+                badgeText: "#2E7D32"
+            },
+            {
+                id: 4,
+                name: "Daily Fresh Market",
+                specialty: "Daily Essentials",
+                avatar: "🛒",
+                bgColor: "var(--bg-light-blue)",
+                status: "open",
+                distance: 0.3,
+                products: ["🥚", "🥔", "🧅", "🌶️"],
+                rating: 4.6,
+                reviews: 312,
+                badge: "Neighborhood Favorite",
+                badgeColor: "#FFF3E0",
+                badgeText: "#F57C00"
+            },
+            {
+                id: 5,
+                name: "Tropical Fruits Hub",
+                specialty: "Exotic Fruits",
+                avatar: "🥭",
+                bgColor: "var(--bg-light-orange)",
+                status: "open",
+                distance: 1.8,
+                products: ["🥭", "🍍", "🥥", "🍉"],
+                rating: 4.5,
+                reviews: 127,
+                badge: "Verified Seller",
+                badgeColor: "#E3F2FD",
+                badgeText: "#1976D2"
+            },
+            {
+                id: 6,
+                name: "Herb Garden",
+                specialty: "Fresh Herbs",
+                avatar: "🌿",
+                bgColor: "var(--bg-light-green)",
+                status: "open",
+                distance: 0.9,
+                products: ["🌿", "🍃", "🌱", "🥬"],
+                rating: 4.7,
+                reviews: 94,
+                badge: "Top Rated",
+                badgeColor: "#FFF3E0",
+                badgeText: "#F57C00"
+            }
+        ];
+
+        let filteredVendors = [...vendors];
+
+        function renderVendors() {
+            const grid = document.getElementById('vendorsGrid');
+
+            grid.innerHTML = filteredVendors.map(vendor => `
+        <div class="vendor-card">
+          <div class="vendor-header">
+            <div class="vendor-avatar" style="background: ${vendor.bgColor};">${vendor.avatar}</div>
+            <div class="vendor-info">
+              <div class="vendor-name">${vendor.name}</div>
+              <div class="vendor-specialty">${vendor.specialty}</div>
+            </div>
+          </div>
+          
+          <div class="vendor-status-row">
+            <span class="status-badge ${vendor.status}">● ${vendor.status === 'open' ? 'Open Now' : 'Closed'}</span>
+            <span class="distance">📍 ${vendor.distance} km</span>
+          </div>
+          
+          <div class="vendor-products">
+            ${vendor.products.map(p => `<span>${p}</span>`).join('')}
+          </div>
+          
+          <div class="vendor-footer">
+            <div class="vendor-rating">
+              <span class="rating"><span class="rating-star">⭐</span> ${vendor.rating}</span>
+              <span class="review-count">(${vendor.reviews})</span>
+            </div>
+            <span class="vendor-badge" style="background: ${vendor.badgeColor}; color: ${vendor.badgeText};">${vendor.badge}</span>
+          </div>
+        </div>
+      `).join('');
+        }
+
+        // Search
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const search = e.target.value.toLowerCase();
+            filterVendors();
+        });
+
+        // Status filter
+        document.getElementById('statusFilter').addEventListener('change', filterVendors);
+
+        // Sort
+        document.getElementById('sortBy').addEventListener('change', (e) => {
+            const sortBy = e.target.value;
+            if (sortBy === 'distance') {
+                filteredVendors.sort((a, b) => a.distance - b.distance);
+            } else if (sortBy === 'rating') {
+                filteredVendors.sort((a, b) => b.rating - a.rating);
+            } else if (sortBy === 'name') {
+                filteredVendors.sort((a, b) => a.name.localeCompare(b.name));
+            }
+            renderVendors();
+        });
+
+        function filterVendors() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const status = document.getElementById('statusFilter').value;
+
+            filteredVendors = vendors.filter(vendor => {
+                const matchesSearch = vendor.name.toLowerCase().includes(search) ||
+                    vendor.specialty.toLowerCase().includes(search);
+                const matchesStatus = status === 'all' || vendor.status === status;
+                return matchesSearch && matchesStatus;
+            });
+
+            renderVendors();
+        }
+
+        // Update cart count
+        function updateCartCount() {
+            const cart = localStorage.getItem('cart');
+            const items = cart ? JSON.parse(cart) : [];
+            const count = items.reduce((total, item) => total + (item.quantity || 1), 0);
+            document.getElementById('cartCount').textContent = count;
+            document.getElementById('cartCount').style.display = count > 0 ? 'flex' : 'none';
+        }
+
+        // Initialize
+        updateCartCount();
+        renderVendors();
+    </script>
+</body>
+
+</html>

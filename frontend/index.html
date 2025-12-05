@@ -4,302 +4,416 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="Greenly - Connect with local vendors for fresh fruits, vegetables, and eco-friendly services">
-  <title>Greenly - Fresh from Your Neighborhood</title>
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
-
-  <!-- Google Fonts -->
+  <title>Greenly - Farm Fresh Produce Delivered to Your Door</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap"
     rel="stylesheet">
-
-  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages/home.css">
+  <link rel="stylesheet" href="css/freshmarket-theme.css">
 </head>
 
 <body>
   <!-- Navigation -->
-  <nav class="navbar">
+  <nav class="navbar" style="background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
     <div class="container navbar-container">
-      <a href="index.html" class="navbar-logo">
-        <span>🌿</span>
-        <span>Greenly</span>
+      <a href="index.html" class="navbar-logo" style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 28px;">🌿</span>
+        <span style="font-weight: 700; font-size: 20px;">Greenly</span>
       </a>
-
-      <div class="navbar-toggle" id="navbarToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-
-      <ul class="navbar-menu" id="navbarMenu">
-        <li><a href="index.html" class="navbar-link active">Home</a></li>
-        <li><a href="pages/products.html" class="navbar-link">Products</a></li>
-        <li><a href="pages/static/about.html" class="navbar-link">About</a></li>
-        <li><a href="pages/cart.html" class="navbar-link">Cart <span class="cart-count" id="cartCount">0</span></a></li>
-        <li><a href="pages/login.html" class="btn btn-primary btn-sm">Login</a></li>
+      <ul class="navbar-menu" style="display: flex; align-items: center; gap: 32px; list-style: none;">
+        <li><a href="pages/products.html?category=vegetable"
+            style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Vegetables</a></li>
+        <li><a href="pages/products.html?category=fruit"
+            style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Fruits</a></li>
+        <li><a href="pages/vendors.html"
+            style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Vendors</a></li>
+        <li><a href="#scrap" style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Scrap
+            Services</a></li>
       </ul>
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <div style="display: flex; align-items: center; gap: 6px; color: var(--text-medium); font-size: 14px;">
+          <span>📍</span>
+          <span id="locationText">Bengaluru</span>
+        </div>
+        <a href="pages/cart.html" style="position: relative; text-decoration: none;">
+          <span style="font-size: 24px;">🛒</span>
+          <span class="cart-count" id="cartCount"
+            style="position: absolute; top: -8px; right: -8px; background: var(--primary); color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">0</span>
+        </a>
+        <a href="pages/login.html" class="btn"
+          style="border: 2px solid var(--primary); color: var(--primary); background: white; padding: 8px 20px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+          👤 Login
+        </a>
+      </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero">
+  <section class="hero-new">
     <div class="container">
-      <div class="hero-content">
-        <div class="hero-text">
-          <h1 class="hero-title">
-            Fresh Produce from Your
-            <span class="text-primary">Local Vendors</span>
+      <div class="hero-content-new">
+        <div class="hero-text-new">
+          <div class="hero-badges">
+            <span class="badge badge-success">🌿 100% Fresh</span>
+            <span class="badge badge-warning">🚚 Same Day Delivery</span>
+          </div>
+
+          <h1>
+            Farm Fresh Produce<br>
+            <span class="highlight">Delivered</span> to<br>
+            Your Door
           </h1>
-          <p class="hero-description">
-            Support your neighborhood vendors and get the freshest fruits & vegetables
-            delivered right to your doorstep. No cold storage, just pure freshness! 🌱
+
+          <p class="hero-subtitle">
+            Skip cold storage & middlemen. Buy directly from local street vendors and get the freshest fruits &
+            vegetables at the best prices.
           </p>
 
-          <div class="hero-features">
-            <div class="hero-feature">
-              <span class="hero-feature-icon">🚫</span>
+          <div style="display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 8px; color: var(--text-medium);">
+              <span>🚫</span>
               <span>No Cold Storage</span>
             </div>
-            <div class="hero-feature">
-              <span class="hero-feature-icon">🌿</span>
-              <span>100% Fresh</span>
+            <div style="display: flex; align-items: center; gap: 8px; color: var(--text-medium);">
+              <span>📍</span>
+              <span>Hyperlocal</span>
             </div>
-            <div class="hero-feature">
-              <span class="hero-feature-icon">💚</span>
-              <span>Support Local</span>
+            <div style="display: flex; align-items: center; gap: 8px; color: var(--text-medium);">
+              <span>⭐</span>
+              <span>Best Prices</span>
             </div>
           </div>
 
-          <div class="hero-actions">
-            <button class="btn btn-primary btn-lg" id="findVendorsBtn">
+          <div class="hero-actions-new">
+            <a href="pages/products.html" class="btn btn-primary btn-lg" style="padding: 16px 32px; font-size: 16px;">
+              Start Shopping →
+            </a>
+            <button class="btn btn-outline btn-lg" onclick="findVendorsNearMe()"
+              style="padding: 16px 32px; font-size: 16px;">
               📍 Find Vendors Near Me
             </button>
-            <a href="pages/products.html" class="btn btn-outline btn-lg">
-              Browse Products
-            </a>
-          </div>
-
-          <div class="hero-stats">
-            <div class="hero-stat">
-              <span class="hero-stat-number">500+</span>
-              <span class="hero-stat-label">Local Vendors</span>
-            </div>
-            <div class="hero-stat">
-              <span class="hero-stat-number">10K+</span>
-              <span class="hero-stat-label">Happy Customers</span>
-            </div>
-            <div class="hero-stat">
-              <span class="hero-stat-number">50+</span>
-              <span class="hero-stat-label">Neighborhoods</span>
-            </div>
           </div>
         </div>
 
-        <div class="hero-image">
-          <div class="hero-image-wrapper">
-            <img src="assets/images/hero-vegetables.png" alt="Fresh vegetables" id="heroImage">
+        <div style="position: relative;">
+          <div class="featured-product-card">
+            <div class="featured-product-image">
+              🍅
+            </div>
+            <div class="featured-product-info">
+              <span class="badge badge-success" style="margin-bottom: 8px;">Picked Today</span>
+              <p style="font-size: 13px; color: var(--text-medium); margin-bottom: 4px;">Fresh from Ram's Stall</p>
+              <h3>Organic Tomatoes</h3>
+              <div class="featured-product-price">₹40<span
+                  style="font-size: 16px; font-weight: 400; color: var(--text-medium);">/kg</span></div>
+              <a href="pages/products.html" class="btn btn-primary" style="width: 100%;">Add to Cart</a>
+            </div>
+          </div>
+
+          <div class="vendor-count-badge">
+            <div class="vendor-count-icon">📍</div>
+            <div class="vendor-count-text">
+              <strong id="vendorCount">12 Vendors</strong>
+              <small>within 2 km</small>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Categories Section -->
-  <section class="categories-section">
+  <!-- Trusted Vendors Section -->
+  <section class="section-new" style="background: white;">
     <div class="container">
-      <h2 class="section-title text-center">Shop by Category</h2>
-      <p class="section-subtitle text-center">Fresh produce from local vendors</p>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+        <div>
+          <h2 style="font-size: 36px; margin-bottom: 8px;">Trusted Vendors</h2>
+          <p style="color: var(--text-medium);">Local sellers bringing freshness to your doorstep</p>
+        </div>
+        <a href="pages/vendors.html" class="btn btn-outline">View All Vendors</a>
+      </div>
 
-      <div class="categories-grid">
-        <a href="pages/products.html?category=fruit" class="category-card">
-          <div class="category-icon">🍎</div>
-          <h3 class="category-name">Fruits</h3>
-          <p class="category-description">Fresh seasonal fruits</p>
-        </a>
+      <div class="grid-4">
+        <!-- Vendor Card 1 -->
+        <div class="vendor-card">
+          <div class="vendor-header">
+            <div class="vendor-avatar">👨‍🌾</div>
+            <div class="vendor-info">
+              <div class="vendor-name">Ram's Vegetable Stall</div>
+              <div class="vendor-specialty">Fresh Vegetables</div>
+            </div>
+          </div>
 
-        <a href="pages/products.html?category=vegetable" class="category-card">
-          <div class="category-icon">🥕</div>
-          <h3 class="category-name">Vegetables</h3>
-          <p class="category-description">Farm-fresh veggies</p>
-        </a>
+          <div class="vendor-status-row">
+            <span class="status-badge open">● Open Now</span>
+            <span class="distance">📍 0.8 km</span>
+          </div>
 
-        <a href="pages/products.html?category=leafy" class="category-card">
-          <div class="category-icon">🥬</div>
-          <h3 class="category-name">Leafy Greens</h3>
-          <p class="category-description">Nutritious greens</p>
-        </a>
+          <div class="vendor-products">
+            <span>🍅</span>
+            <span>🥬</span>
+            <span>🥕</span>
+            <span>🥒</span>
+          </div>
 
-        <a href="pages/products.html?category=herbs" class="category-card">
-          <div class="category-icon">🌿</div>
-          <h3 class="category-name">Herbs</h3>
-          <p class="category-description">Aromatic herbs</p>
-        </a>
+          <div class="vendor-footer">
+            <div class="vendor-rating">
+              <span class="rating"><span class="rating-star">⭐</span> 4.8</span>
+              <span class="review-count">(156)</span>
+            </div>
+            <span class="vendor-badge">Verified Seller</span>
+          </div>
+        </div>
+
+        <!-- Vendor Card 2 -->
+        <div class="vendor-card">
+          <div class="vendor-header">
+            <div class="vendor-avatar" style="background: var(--bg-light-pink);">🍎</div>
+            <div class="vendor-info">
+              <div class="vendor-name">Lakshmi's Fruit Corner</div>
+              <div class="vendor-specialty">Seasonal Fruits</div>
+            </div>
+          </div>
+
+          <div class="vendor-status-row">
+            <span class="status-badge open">● Open Now</span>
+            <span class="distance">📍 1.2 km</span>
+          </div>
+
+          <div class="vendor-products">
+            <span>🍎</span>
+            <span>🍌</span>
+            <span>🍊</span>
+            <span>🍇</span>
+          </div>
+
+          <div class="vendor-footer">
+            <div class="vendor-rating">
+              <span class="rating"><span class="rating-star">⭐</span> 4.9</span>
+              <span class="review-count">(203)</span>
+            </div>
+            <span class="vendor-badge" style="background: #FFF3E0; color: #F57C00;">Top Rated</span>
+          </div>
+        </div>
+
+        <!-- Vendor Card 3 -->
+        <div class="vendor-card">
+          <div class="vendor-header">
+            <div class="vendor-avatar" style="background: var(--bg-light-yellow);">🌿</div>
+            <div class="vendor-info">
+              <div class="vendor-name">Green Earth Organics</div>
+              <div class="vendor-specialty">Organic Produce</div>
+            </div>
+          </div>
+
+          <div class="vendor-status-row">
+            <span class="status-badge closed">● Closed</span>
+            <span class="distance">📍 1.5 km</span>
+          </div>
+
+          <div class="vendor-products">
+            <span>🥒</span>
+            <span>🥦</span>
+            <span>🌽</span>
+            <span>🍆</span>
+          </div>
+
+          <div class="vendor-footer">
+            <div class="vendor-rating">
+              <span class="rating"><span class="rating-star">⭐</span> 4.7</span>
+              <span class="review-count">(89)</span>
+            </div>
+            <span class="vendor-badge" style="background: #E8F5E9; color: #2E7D32;">Certified Organic</span>
+          </div>
+        </div>
+
+        <!-- Vendor Card 4 -->
+        <div class="vendor-card">
+          <div class="vendor-header">
+            <div class="vendor-avatar" style="background: var(--bg-light-blue);">🛒</div>
+            <div class="vendor-info">
+              <div class="vendor-name">Daily Fresh Market</div>
+              <div class="vendor-specialty">Daily Essentials</div>
+            </div>
+          </div>
+
+          <div class="vendor-status-row">
+            <span class="status-badge open">● Open Now</span>
+            <span class="distance">📍 0.3 km</span>
+          </div>
+
+          <div class="vendor-products">
+            <span>🥚</span>
+            <span>🥔</span>
+            <span>🧅</span>
+            <span>🌶️</span>
+          </div>
+
+          <div class="vendor-footer">
+            <div class="vendor-rating">
+              <span class="rating"><span class="rating-star">⭐</span> 4.6</span>
+              <span class="review-count">(312)</span>
+            </div>
+            <span class="vendor-badge" style="background: #FFF3E0; color: #F57C00;">Neighborhood Favorite</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- How It Works -->
-  <section class="how-it-works">
+  <!-- Shop by Category -->
+  <section class="section-new" style="background: var(--bg-light);">
     <div class="container">
-      <h2 class="section-title text-center">How Greenly Works</h2>
-      <p class="section-subtitle text-center">Simple steps to fresh produce</p>
+      <div class="section-header">
+        <h2>Shop by Category</h2>
+        <p>Browse through our wide selection of fresh produce, all sourced directly from local vendors</p>
+      </div>
 
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-number">1</div>
-          <h3 class="step-title">Find Vendors</h3>
-          <p class="step-description">
-            Allow location access to discover vendors near you selling fresh produce
-          </p>
-        </div>
+      <div class="grid-6">
+        <a href="pages/products.html?category=vegetable" class="category-card"
+          style="background: var(--bg-light-green);">
+          <span class="category-icon">🥬</span>
+          <h3>Fresh Vegetables</h3>
+          <p class="item-count">150+ items</p>
+        </a>
 
-        <div class="step-card">
-          <div class="step-number">2</div>
-          <h3 class="step-title">Browse & Order</h3>
-          <p class="step-description">
-            Browse products, check freshness tags, and add items to your cart
-          </p>
-        </div>
+        <a href="pages/products.html?category=fruit" class="category-card" style="background: var(--bg-light-pink);">
+          <span class="category-icon">🍎</span>
+          <h3>Seasonal Fruits</h3>
+          <p class="item-count">80+ items</p>
+        </a>
 
-        <div class="step-card">
-          <div class="step-number">3</div>
-          <h3 class="step-title">Get Delivered</h3>
-          <p class="step-description">
-            Vendor confirms your order and delivers fresh produce to your doorstep
-          </p>
-        </div>
+        <a href="pages/products.html" class="category-card" style="background: var(--bg-light-beige);">
+          <span class="category-icon">🥑</span>
+          <h3>Exotic Produce</h3>
+          <p class="item-count">40+ items</p>
+        </a>
 
-        <div class="step-card">
-          <div class="step-number">4</div>
-          <h3 class="step-title">Support Local</h3>
-          <p class="step-description">
-            Your purchase directly supports local vendors and their families
-          </p>
-        </div>
+        <a href="pages/products.html" class="category-card" style="background: var(--bg-light-yellow);">
+          <span class="category-icon">🥚</span>
+          <h3>Daily Essentials</h3>
+          <p class="item-count">60+ items</p>
+        </a>
+
+        <a href="pages/products.html?category=herbs" class="category-card" style="background: var(--bg-light-green);">
+          <span class="category-icon">🌿</span>
+          <h3>Herbs & Greens</h3>
+          <p class="item-count">35+ items</p>
+        </a>
+
+        <a href="pages/collector/register.html" class="category-card" style="background: var(--bg-light-blue);">
+          <span class="category-icon">♻️</span>
+          <h3>Scrap Services</h3>
+          <p class="item-count">Eco-friendly</p>
+        </a>
       </div>
     </div>
   </section>
 
   <!-- Vendor CTA -->
-  <section class="vendor-cta">
+  <section class="section-new" style="background: white;">
     <div class="container">
-      <div class="vendor-cta-content">
-        <div class="vendor-cta-text">
-          <h2 class="vendor-cta-title">Are You a Vendor?</h2>
-          <p class="vendor-cta-description">
-            Join Greenly and reach thousands of customers in your neighborhood.
-            Get your own digital storefront and grow your business!
+      <div
+        style="background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 100%); border-radius: 24px; padding: 60px; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;">
+        <div>
+          <h2 style="font-size: 36px; margin-bottom: 16px;">Are you a local vendor?</h2>
+          <p style="font-size: 18px; color: var(--text-medium); margin-bottom: 0;">
+            Join our platform and reach thousands of customers in your neighborhood. Get a digital presence for your
+            stall today!
           </p>
-          <ul class="vendor-cta-benefits">
-            <li>✅ Free registration</li>
-            <li>✅ Easy-to-use dashboard</li>
-            <li>✅ Reach more customers</li>
-            <li>✅ Manage orders digitally</li>
-          </ul>
-          <a href="pages/vendor/register.html" class="btn btn-secondary btn-lg">
-            Register as Vendor
-          </a>
         </div>
-        <div class="vendor-cta-image">
-          <div class="vendor-cta-icon">🛒</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Scrap Collector CTA -->
-  <section class="collector-cta">
-    <div class="container">
-      <div class="collector-cta-content">
-        <div class="collector-cta-image">
-          <div class="collector-cta-icon">♻️</div>
-        </div>
-        <div class="collector-cta-text">
-          <h2 class="collector-cta-title">Scrap Collectors</h2>
-          <p class="collector-cta-description">
-            Connect with customers who want to sell scrap materials.
-            Get pickup requests directly from your service area!
-          </p>
-          <a href="pages/collector/register.html" class="btn btn-primary btn-lg">
-            Register as Collector
-          </a>
-        </div>
+        <a href="pages/vendor/register.html" class="btn btn-primary btn-lg"
+          style="padding: 16px 32px; white-space: nowrap;">
+          Register as Vendor →
+        </a>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer" style="background: var(--text-dark); color: white; padding: 60px 0 30px;">
     <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3 class="footer-title">
-            <span>🌿</span> Greenly
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-bottom: 40px;">
+        <div>
+          <h3 style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span style="font-size: 28px;">🌿</span>
+            <span>Greenly</span>
           </h3>
-          <p class="footer-description">
-            Empowering local vendors and bringing fresh produce to your neighborhood.
-          </p>
+          <p style="color: #BDBDBD;">Empowering local vendors and bringing fresh produce to your neighborhood.</p>
         </div>
 
-        <div class="footer-section">
-          <h4 class="footer-heading">Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="pages/static/about.html">About Us</a></li>
-            <li><a href="pages/static/faq.html">FAQ</a></li>
-            <li><a href="pages/products.html">Products</a></li>
-            <li><a href="pages/vendor/register.html">Become a Vendor</a></li>
+        <div>
+          <h4 style="margin-bottom: 16px;">Quick Links</h4>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 8px;"><a href="pages/static/about.html"
+                style="color: #BDBDBD; text-decoration: none;">About Us</a></li>
+            <li style="margin-bottom: 8px;"><a href="pages/products.html"
+                style="color: #BDBDBD; text-decoration: none;">Products</a></li>
+            <li style="margin-bottom: 8px;"><a href="pages/vendors.html"
+                style="color: #BDBDBD; text-decoration: none;">Vendors</a></li>
           </ul>
         </div>
 
-        <div class="footer-section">
-          <h4 class="footer-heading">Legal</h4>
-          <ul class="footer-links">
+        <div>
+          <h4 style="margin-bottom: 16px;">For Vendors</h4>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 8px;"><a href="pages/vendor/register.html"
+                style="color: #BDBDBD; text-decoration: none;">Register as Vendor</a></li>
+            <li style="margin-bottom: 8px;"><a href="pages/vendor/dashboard.html"
+                style="color: #BDBDBD; text-decoration: none;">Vendor Dashboard</a></li>
+          </ul>
         </div>
+
+        <div>
+          <h4 style="margin-bottom: 16px;">Connect</h4>
+          <p style="color: #BDBDBD; margin-bottom: 12px;">📧 harshchoudhary2512@gmail.com</p>
+          <div style="display: flex; gap: 16px; margin-top: 16px;">
+            <a href="https://www.linkedin.com/in/harsh-choudhary-08b00b266/" target="_blank"
+              style="color: #0077B5; font-size: 24px;">💼</a>
+            <a href="https://github.com/Harshchoudhary07" target="_blank" style="color: #fff; font-size: 24px;">💻</a>
+            <a href="https://www.instagram.com/choudhary_jii.07/" target="_blank"
+              style="color: #E4405F; font-size: 24px;">📸</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid #424242; padding-top: 24px; text-align: center; color: #BDBDBD;">
+        <p>&copy; 2024 Greenly. All rights reserved. Made with 💚 for local communities.</p>
+      </div>
+    </div>
   </footer>
 
-  <!-- Scripts -->
   <script src="js/config.js"></script>
-  <script src="js/api.js"></script>
   <script src="js/utils.js"></script>
-  <script src="js/location.js"></script>
-  <script src="js/cart.js"></script>
   <script>
-    // Mobile menu toggle
-    const navbarToggle = document.getElementById('navbarToggle');
-    const navbarMenu = document.getElementById('navbarMenu');
-
-    navbarToggle.addEventListener('click', () => {
-      navbarMenu.classList.toggle('active');
-    });
-
-    // Find vendors button
-    const findVendorsBtn = document.getElementById('findVendorsBtn');
-    findVendorsBtn.addEventListener('click', async () => {
-      try {
-        const location = await getLocation();
-        if (location) {
-          window.location.href = `pages/products.html?lat=${location.lat}&lng=${location.lng}`;
-        }
-      } catch (error) {
-        alert('Please enable location access to find vendors near you');
-      }
-    });
-
     // Update cart count
     function updateCartCount() {
-      const cart = getCart();
-      const count = cart.reduce((total, item) => total + item.quantity, 0);
+      const cart = localStorage.getItem('cart');
+      const items = cart ? JSON.parse(cart) : [];
+      const count = items.reduce((total, item) => total + (item.quantity || 1), 0);
       document.getElementById('cartCount').textContent = count;
+      document.getElementById('cartCount').style.display = count > 0 ? 'flex' : 'none';
+    }
+
+    // Find vendors near me
+    function findVendorsNearMe() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            document.getElementById('locationText').textContent = 'Location detected';
+            window.location.href = 'pages/vendors.html';
+          },
+          (error) => {
+            alert('Please enable location access to find vendors near you');
+          }
+        );
+      } else {
+        alert('Geolocation is not supported by your browser');
+      }
     }
 
     // Initialize
